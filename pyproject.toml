@@ -1,0 +1,38 @@
+[project]
+name = "hydrus-ocr"
+version = "0.1.0"
+dependencies = [
+  "hydrus-api",
+  "pillow",
+  "pyocr",
+  "python-dotenv",
+]
+requires-python = ">=3.8"
+authors = [
+  {name = "Tomodachi94"},
+]
+description = "Retrieve files from Hydrus Network and run them through OCR."
+readme = "README.md"
+license = {file = "LICENSE.md"}
+
+[project.urls]
+Documentation = "https://github.com/tomodachi94/hydrus-ocr#readme"
+Source = "https://github.com/tomodachi94/hydrus-ocr"
+"Bug Tracker" = "https://github.com/tomodachi94/hydrus-ocr/issues"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project.scripts]
+main = "hydrus_ocr:mainloop"
+
+[tool.hatch.build.targets.wheel]
+packages = ["hydrus_ocr"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "hydrus_ocr/*.py",
+  "README.md",
+]
+
