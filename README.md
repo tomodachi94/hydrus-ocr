@@ -49,6 +49,9 @@ I use Hydrus to store a large repository of screenshots of chat logs. I wanted t
 
 [Multi-language support](https://github.com/tomodachi94/hydrus-ocr/issues/1), [threading](https://github.com/tomodachi94/hydrus-ocr/issues/2), and [single-pass runs](https://github.com/tomodachi94/hydrus-ocr/issues/3) are planned for the future. Subscribe to the relevant GitHub issue for updates.
 
+### Why is the quality of the text so bad?
+This program uses Tesseract to do most of the heavy lifting. Tesseract is notoriously bad at OCRing specific types of images, as well as images of lower quality.
+
 ### Why is this separate from Hydrus?
 Aside from the fact that this would likely be rejected in a PR, OCR can be a resource-intensive operation, and I didn't want to risk the stability of my Hydrus application.
 
