@@ -4,6 +4,7 @@ Retrieve files from Hydrus Network and run them through OCR.
 See ../README.md for more details, including documentation.
 """
 import os
+import sys
 import io
 from time import sleep
 
@@ -26,6 +27,16 @@ access_key: str = os.getenv("HYDRUS_OCR_ACCESS_KEY")
 tag_service_key: str = os.getenv("HYDRUS_OCR_TAG_SERVICE_KEY")
 loop_delay: int = int(os.getenv("HYDRUS_OCR_LOOP_DELAY"))
 ocr_language: str = os.getenv("HYDRUS_OCR_LANGUAGE")
+
+# determine if we want to run in "singular run mode" or "daemon mode"
+# "singular run mode" runs the program once then exits
+# "daemon mode" runs the program continuously
+if sys.argv[1] and (sys.argv[1] == "singular"):
+    daemon: bool = False
+elif sys.argv[1] and (sys.argv[1] == "daemon"):
+    daemon: bool = True
+else:
+    raise Exception("Please specify the 'daemon' or 'singular' subcommand.")
 
 # This is a list of all filetypes supported by both PIL and Hydrus
 valid_file_types = [
@@ -114,7 +125,8 @@ def mainloop():
     """
     Run the program using the functions defined above.
     """
-    while True:
+    run = True
+    while run:
         for i in find_images()["file_ids"]:
             image = get_image(i)
             if image:
@@ -123,7 +135,11 @@ def mainloop():
             else:
                 pass
 
-        sleep(loop_delay)
+        # If we're not in daemon mode, exit immediately after first run
+        if not daemon:
+            run = False
+        else:
+            sleep(loop_delay)
 
 
 if __name__ == "__main__":

@@ -17,8 +17,8 @@ This project runs [OCR](https://en.wikipedia.org/wiki/Optical_character_recognit
 1. Clone this repository and install its dependencies with `python3 -m pip install -r ./requirements.txt`.
 2. Install `tesseract` and ensure it is available on your `$PATH`.
 3. Copy `env.example` to `.env` (or to another place where you can set environment variables) and fill in the values.
-4. Run the daemon. If you want to get fancy, you can configure it to start up automatically with `systemd`, but that is outside of the scope of these docs.
-
+4. Run the daemon using `python3 -m hydrus_ocr daemon`. If you want to get fancy, you can configure it to start up automatically with `systemd`, but that is outside of the scope of these docs.
+    * If you only want to run this once (e.g. for running this with `cron`), run `python3 -m hydrus_ocr singular`.
 
 ## Usage
 1. Select a file (or a bunch of files!) and right-click them. Select `manage > tags`, select `ocr` (or the name you selected for the tag service), and add the `ocr wanted` tag to the file(s). Apply the changes.
@@ -47,7 +47,7 @@ I use Hydrus to store a large repository of screenshots of chat logs. I wanted t
 * It does not use threading to OCR multiple files at once.
 * Singular runs are not supported; the program loops itself and constantly runs in the background daemon-style.
 
-[Multi-language support](https://github.com/tomodachi94/hydrus-ocr/issues/1), [threading](https://github.com/tomodachi94/hydrus-ocr/issues/2), and [single-pass runs](https://github.com/tomodachi94/hydrus-ocr/issues/3) are planned for the future. Subscribe to the relevant GitHub issue for updates.
+[Multi-language support](https://github.com/tomodachi94/hydrus-ocr/issues/1) and [threading](https://github.com/tomodachi94/hydrus-ocr/issues/2) are planned for the future. Subscribe to the relevant GitHub issue for updates.
 
 ### Why is the quality of the text so bad?
 This program uses Tesseract to do most of the heavy lifting. Tesseract is notoriously bad at OCRing specific types of images, as well as images of lower quality.
