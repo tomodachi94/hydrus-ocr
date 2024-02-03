@@ -27,15 +27,49 @@ tag_service_key: str = os.getenv("HYDRUS_OCR_TAG_SERVICE_KEY")
 loop_delay: int = int(os.getenv("HYDRUS_OCR_LOOP_DELAY"))
 ocr_language: str = os.getenv("HYDRUS_OCR_LANGUAGE")
 
+# This is a list of all filetypes supported by both PIL and Hydrus
+valid_file_types = [
+        "image/jpeg",
+        "image/png",
+        "image/webp",
+        "image/tiff",
+        "image/qoi",
+        "image/x-icon",
+        "image/bmp",
+        "image/heif",
+        "image/heic",
+        "image/avif"
+        ]
+
 # Initialize the client with values from configuration
 hydrus_client: hydrus.Client = hydrus.Client(access_key, hydrus_api_url)
+
+
+def remove_ocr_service_tag(file_id: int, tag: str) -> None:
+    """
+    Removes a tag from an item in the program's tag service.
+    """
+    hydrus_client.add_tags(
+            file_ids=[file_id],
+            service_keys_to_actions_to_tags={tag_service_key: {1: ["ocr wanted"]}}
+            )
+
+
+def add_ocr_service_tag(file_id: int, tag: str) -> None:
+    """
+    Adds a tag to an item inside of the program's tag service.
+    """
+    hydrus_client.add_tags(
+            file_ids=[file_id],
+            service_keys_to_tags={tag_service_key: ["ocr completed"]}
+            )
 
 
 def find_images():
     """
     Finds all images with the 'ocr wanted' tag set in our tag service.
     """
-    tags = ["ocr wanted"]
+    tags = ["ocr wanted", "-ocr rejected"]
     return hydrus_client.search_files(tags, tag_service_key=tag_service_key)
 
 
@@ -44,8 +78,12 @@ def get_image(file_id: int) -> Image:
     Retrieves an image from Hydrus and converts it to an Image object.
     """
     file = hydrus_client.get_file(file_id=file_id)
-    print(file.raw)
-    return Image.open(io.BytesIO(file.content))
+    if file.headers["Content-Type"] in valid_file_types:
+        return Image.open(io.BytesIO(file.content))
+    else:
+        remove_ocr_service_tag(file_id, "ocr wanted")
+        add_ocr_service_tag(file_id, "ocr rejected")
+        return None
 
 
 def ocr_image(image: Image) -> str:
@@ -68,14 +106,8 @@ def write_ocr_to_hydrus(file_id: int, text: str) -> None:
     """
     notes = {'ocr': text}
     hydrus_client.set_notes(notes, file_id=file_id)
-    hydrus_client.add_tags(
-        file_ids=[file_id],
-        service_keys_to_tags={tag_service_key: ["ocr completed"]}
-        )
-    hydrus_client.add_tags(
-        file_ids=[file_id],
-        service_keys_to_actions_to_tags={tag_service_key: {1: ["ocr wanted"]}}
-    )
+    add_ocr_service_tag(file_id, "ocr completed")
+    remove_ocr_service_tag(file_id, "ocr wanted")
 
 
 def mainloop():
@@ -85,8 +117,11 @@ def mainloop():
     while True:
         for i in find_images()["file_ids"]:
             image = get_image(i)
-            text = ocr_image(image)
-            write_ocr_to_hydrus(i, text)
+            if image:
+                text = ocr_image(image)
+                write_ocr_to_hydrus(i, text)
+            else:
+                pass
 
         sleep(loop_delay)
 
