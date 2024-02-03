@@ -1,8 +1,8 @@
 # hydrus-ocr
 
-This project runs [OCR](https://en.wikipedia.org/wiki/Optical_character_recognition) on images located in Hydrus Network using `tesseract` and an external daemon.
+This project runs [OCR](https://en.wikipedia.org/wiki/Optical_character_recognition) on images located in [Hydrus Network](https://hydrusnetwork.github.io/hydrus/) using `tesseract` and an external daemon.
 
-> Warning
+> [!WARNING]
 > I am not liable if this destroys your data. **[Make backups regularly](https://hydrusnetwork.github.io/hydrus/getting_started_installing.html#backing_up)**.
 
 
@@ -47,7 +47,7 @@ I use Hydrus to store a large repository of screenshots of chat logs. I wanted t
 * It does not use threading to OCR multiple files at once.
 * Singular runs are not supported; the program loops itself and constantly runs in the background daemon-style.
 
-Multi-language support, threading, and single-pass runs are planned for the future.
+[Multi-language support](https://github.com/tomodachi94/hydrus-ocr/issues/1), [threading](https://github.com/tomodachi94/hydrus-ocr/issues/2), and [single-pass runs](https://github.com/tomodachi94/hydrus-ocr/issues/3) are planned for the future. Subscribe to the relevant GitHub issue for updates.
 
 ### Why is this separate from Hydrus?
 Aside from the fact that this would likely be rejected in a PR, OCR can be a resource-intensive operation, and I didn't want to risk the stability of my Hydrus application.
