@@ -3,7 +3,8 @@ name: Pylint
 on:
   push:
     paths:
-      - '**.js'
+      - '**.py'
+      - '.github/workflows/pylint.yml'
 
 jobs:
   build:
