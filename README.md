@@ -32,7 +32,7 @@ This program is configured entirely through environment variables. Here's what t
 * `HYDRUS_OCR_API_URL`: The base URL for the client API. This looks like `http://localhost:45869` by default.
 * `HYDRUS_OCR_TAG_SERVICE_KEY`: The service key for the tag service. This is a long hexadecimal string.
 * `HYDRUS_OCR_LOOP_DELAY`: This controls the frequency at which the program checks for files to OCR. The default value causes a check every 10 seconds; increase or decrease depending on how many requests your Hydrus server can handle at once.
-* `HYDRUS_OCR_LANGUAGE`: The language to OCR the text in (defaults to English). See the [Tesseract documentation](https://tesseract-ocr.github.io/tessdoc/Data-Files) for a full list of languages. Make sure to install the language you want if it isn't available by default.
+* `HYDRUS_OCR_LANGUAGE`: The language to OCR the text in (defaults to English). See the [Tesseract documentation](https://tesseract-ocr.github.io/tessdoc/Data-Files) for a full list of languages. Make sure to install the language(s) you want if it isn't available by default. Multiple languages are supported by separating each with a plus (like `eng+deu+jpn`).
 
 
 ## FAQ
@@ -43,11 +43,9 @@ You shouldn't. You should read the source code yourself. I've tried to make the 
 I use Hydrus to store a large repository of screenshots of chat logs. I wanted to find a way to search their text, and this is the result.
 
 ### What are the limitations of this program?
-* It currently only supports one language at a time.
-* It does not use threading to OCR multiple files at once.
-* Singular runs are not supported; the program loops itself and constantly runs in the background daemon-style.
+It does not use threading to OCR multiple files at once.
 
-[Multi-language support](https://github.com/tomodachi94/hydrus-ocr/issues/1) and [threading](https://github.com/tomodachi94/hydrus-ocr/issues/2) are planned for the future. Subscribe to the relevant GitHub issue for updates.
+[Threading](https://github.com/tomodachi94/hydrus-ocr/issues/2) is planned for the future. Subscribe to the relevant GitHub issue for updates.
 
 ### Why is the quality of the text so bad?
 This program uses Tesseract to do most of the heavy lifting. Tesseract is notoriously bad at OCRing specific types of images, as well as images of lower quality.
