@@ -2,4 +2,3 @@ hydrus-api
 pillow
 pyocr
 python-dotenv
-requests
