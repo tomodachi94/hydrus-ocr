@@ -51,7 +51,7 @@ def remove_ocr_service_tag(file_id: int, tag: str) -> None:
     """
     hydrus_client.add_tags(
             file_ids=[file_id],
-            service_keys_to_actions_to_tags={tag_service_key: {1: ["ocr wanted"]}}
+            service_keys_to_actions_to_tags={tag_service_key: {1: [tag]}}
             )
 
 
@@ -61,7 +61,7 @@ def add_ocr_service_tag(file_id: int, tag: str) -> None:
     """
     hydrus_client.add_tags(
             file_ids=[file_id],
-            service_keys_to_tags={tag_service_key: ["ocr completed"]}
+            service_keys_to_tags={tag_service_key: [tag]}
             )
 
 
