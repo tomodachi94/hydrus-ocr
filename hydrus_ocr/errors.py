@@ -9,7 +9,6 @@ class HydrusOCRError(Exception):
 
     This should only be thrown if there's no way that the daemon can continue.
     """
-    pass
 
 
 class MissingTokenError(HydrusOCRError):
