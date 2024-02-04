@@ -29,3 +29,12 @@ class MissingToolError(HydrusOCRError):
     please see hydrus_ocr's documentation, as well as the manual for the system
     where this was hosted.
     """
+
+
+class NoSubcommandError(HydrusOCRError):
+    """
+    hydrus_ocr was called without a subcommand ('daemon' or 'singular').
+
+    The user most likely attempted running `python -m hydrus_ocr`. They need to
+    run `python -m hydrus_ocr daemon` or `python -m hydrus_ocr singular`.
+    """

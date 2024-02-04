@@ -16,7 +16,11 @@ import hydrus_api as hydrus
 from PIL import Image, ImageFilter
 import pyocr
 
-from hydrus_ocr.errors import MissingTokenError, MissingToolError
+from hydrus_ocr.errors import (
+        MissingTokenError,
+        NoSubcommandError,
+        MissingToolError
+        )
 
 # Configuration
 hydrus_api_url: str = os.getenv("HYDRUS_OCR_API_URL", "http://localhost:45869")
@@ -39,7 +43,7 @@ if sys.argv[1] and (sys.argv[1] == "singular"):
 elif sys.argv[1] and (sys.argv[1] == "daemon"):
     daemon: bool = True
 else:
-    raise Exception("Please specify the 'daemon' or 'singular' subcommand.")
+    raise NoSubcommandError()
 
 # This is a list of all filetypes supported by both PIL and Hydrus
 valid_file_types = [
