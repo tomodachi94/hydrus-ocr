@@ -26,6 +26,12 @@ build-backend = "hatchling.build"
 [project.scripts]
 main = "hydrus_ocr:mainloop"
 
+[project.optional-dependencies]
+dev = [
+  "pylint",
+  "mypy",
+]
+
 [tool.hatch.build.targets.wheel]
 packages = ["hydrus_ocr"]
 
@@ -35,3 +41,8 @@ include = [
   "README.md",
 ]
 
+[tool.pylint.messages_control]
+disable = [
+  # I find that adding the else statement after returns helps with keeping the code readable
+  "no-else-return",
+]
