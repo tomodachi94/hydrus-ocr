@@ -33,7 +33,7 @@ access_key: str = os.getenv("HYDRUS_OCR_ACCESS_KEY")
 tag_service_key: str = os.getenv("HYDRUS_OCR_TAG_SERVICE_KEY")
 
 if not (access_key and tag_service_key):
-    raise MissingTokenError()
+    raise MissingTokenError(MissingTokenError.__doc__)
 
 # determine if we want to run in "singular run mode" or "daemon mode"
 # "singular run mode" runs the program once then exits
@@ -43,7 +43,7 @@ if sys.argv[1] and (sys.argv[1] == "singular"):
 elif sys.argv[1] and (sys.argv[1] == "daemon"):
     daemon: bool = True
 else:
-    raise NoSubcommandError()
+    raise NoSubcommandError(NoSubcommandError.__doc__)
 
 # This is a list of all filetypes supported by both PIL and Hydrus
 valid_file_types = [
@@ -111,7 +111,7 @@ def ocr_image(image: Image) -> str:
     image.filter(ImageFilter.SHARPEN)
     tool = pyocr.get_available_tools()[0]
     if not tool:
-        raise MissingToolError()
+        raise MissingToolError(MissingToolError.__doc__)
 
     return tool.image_to_string(
             image,
