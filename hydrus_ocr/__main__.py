@@ -97,6 +97,9 @@ def ocr_image(image: Image) -> str:
     """
     image.filter(ImageFilter.SHARPEN)
     tool = pyocr.get_available_tools()[0]
+    if not tool:
+        raise Exception("hydrus_ocr depends on third-party software to OCR files. Please install one of the options listed in the documentation to resolve the error.")
+
     return tool.image_to_string(
             image,
             lang=ocr_language,
