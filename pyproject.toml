@@ -41,6 +41,11 @@ include = [
   "README.md",
 ]
 
+[tool.mypy]
+modules = [
+  "hydrus_ocr",
+]
+
 [tool.pylint.messages_control]
 disable = [
   # I find that adding the else statement after returns helps with keeping the code readable
