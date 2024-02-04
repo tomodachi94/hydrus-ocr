@@ -14,7 +14,7 @@ This project runs [OCR](https://en.wikipedia.org/wiki/Optical_character_recognit
 3. Create a client API access key (documented above). Give it the `edit file notes`, `edit file tags`, and `search for and fetch files` permissions. Save the service key for later.
 
 ### In your server environment
-1. Install `hydrus-ocr` and its Python dependencies with `pip install https://github.com/tomodachi94/hydrus-ocr/releases/download/v0.1.0/hydrus_ocr-0.1.0-py3-none-any.whl`.
+1. Install `hydrus-ocr` and its Python dependencies with `pip install https://github.com/tomodachi94/hydrus-ocr/releases/download/v0.2.0/hydrus_ocr-0.2.0-py3-none-any.whl`.
 2. Install either [`tesseract`/`libtesseract`](https://github.com/tesseract-ocr/tesseract?tab=readme-ov-file#installing-tesseract) or [`cuneiform`](https://launchpad.net/cuneiform-linux) and ensure it is available on your `$PATH`.
 3. Copy `env.example` to `.env` (or to another place where you can set environment variables) and fill in the values.
 4. Run the daemon using `python3 -m hydrus_ocr daemon`. If you want to get fancy, you can configure it to start up automatically with `systemd`, but that is outside of the scope of these docs.
