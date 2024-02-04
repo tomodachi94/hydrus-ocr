@@ -5,7 +5,6 @@ dependencies = [
   "hydrus-api",
   "pillow",
   "pyocr",
-  "python-dotenv",
 ]
 requires-python = ">=3.8"
 authors = [

@@ -15,12 +15,6 @@ import hydrus_api as hydrus
 from PIL import Image, ImageFilter
 import pyocr
 
-# read environment variables from .env
-# useful for development and some deployment scenarios
-from dotenv import load_dotenv
-
-load_dotenv()
-
 # Configuration
 hydrus_api_url: str = os.getenv("HYDRUS_OCR_API_URL")
 access_key: str = os.getenv("HYDRUS_OCR_ACCESS_KEY")
