@@ -21,7 +21,6 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
       run: |
-        python -m pip install hatchling -y
         pip install '.[dev]'
     - name: Lint with pylint      
       run: |
