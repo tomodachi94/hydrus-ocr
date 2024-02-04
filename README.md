@@ -43,6 +43,9 @@ The program couldn't find Tesseract or Cuneiform. See [§ Installation](#install
 ### `MissingKeyError`
 The program couldn't find the client API access key and/or the tag service key. See [§ Configuration](#configuration) for more information.
 
+## Changelog
+The changelog is maintained in [`./CHANGELOG.md`](./CHANGELOG.md).
+
 ## FAQ
 ### Why should I trust you?
 You shouldn't. You should read the source code yourself. I've tried to make the code as easy-to-read as possible, with docstrings for all (internal) functions and comments for ambiguous lines of code.
