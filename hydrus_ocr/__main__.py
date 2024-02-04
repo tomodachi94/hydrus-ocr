@@ -6,6 +6,7 @@ See ../README.md for more details, including documentation.
 import os
 import sys
 import io
+import threading
 from time import sleep
 
 # interact with the Hydrus client API
@@ -126,6 +127,18 @@ def write_ocr_to_hydrus(file_id: int, text: str) -> None:
     remove_ocr_service_tag(file_id, "ocr wanted")
 
 
+def process_image(file_id: int) -> None:
+    """
+    Run all of the processing steps on a specific image.
+    """
+    image = get_image(file_id)
+    if image:
+        text = ocr_image(image)
+        write_ocr_to_hydrus(file_id, text)
+    else:
+        pass
+
+
 def mainloop():
     """
     Run the program using the functions defined above.
@@ -133,12 +146,7 @@ def mainloop():
     run = True
     while run:
         for i in find_images()["file_ids"]:
-            image = get_image(i)
-            if image:
-                text = ocr_image(image)
-                write_ocr_to_hydrus(i, text)
-            else:
-                pass
+            threading.Thread(target=process_image, args=(i,)).start()
 
         # If we're not in daemon mode, exit immediately after first run
         if not daemon:

@@ -50,11 +50,6 @@ You shouldn't. You should read the source code yourself. I've tried to make the 
 ### Why does this exist?
 I use Hydrus to store a large repository of screenshots of chat logs. I wanted to find a way to search their text, and this is the result.
 
-### What are the limitations of this program?
-It does not use threading to OCR multiple files at once.
-
-[Threading](https://github.com/tomodachi94/hydrus-ocr/issues/2) is planned for the future. Subscribe to the relevant GitHub issue for updates.
-
 ### Why is the quality of the text so bad?
 This program uses Tesseract to do most of the heavy lifting. Tesseract is notoriously bad at OCRing specific types of images, as well as images of lower quality.
 
