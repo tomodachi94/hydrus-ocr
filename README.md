@@ -34,6 +34,14 @@ This program is configured entirely through environment variables. Here's what t
 * `HYDRUS_OCR_LOOP_DELAY`: This controls the frequency at which the program checks for files to OCR. The default value causes a check every 10 seconds; increase or decrease depending on how many requests your Hydrus server can handle at once.
 * `HYDRUS_OCR_LANGUAGE`: The language to OCR the text in (defaults to English). See the [Tesseract documentation](https://tesseract-ocr.github.io/tessdoc/Data-Files) for a full list of languages. Make sure to install the language(s) you want if it isn't available by default. Multiple languages are supported by separating each with a plus (like `eng+deu+jpn`).
 
+## Errors
+This is a glossary of all possible user-caused errors.
+
+### `MissingToolError`
+The program couldn't find Tesseract or Cuneiform. See [§ Installation](#installation) for more information.
+
+### `MissingKeyError`
+The program couldn't find the client API access key and/or the tag service key. See [§ Configuration](#configuration) for more information.
 
 ## FAQ
 ### Why should I trust you?

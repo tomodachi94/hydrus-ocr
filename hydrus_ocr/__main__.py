@@ -15,12 +15,20 @@ import hydrus_api as hydrus
 from PIL import Image, ImageFilter
 import pyocr
 
+from hydrus_ocr.errors import MissingTokenError, MissingToolError
+
 # Configuration
-hydrus_api_url: str = os.getenv("HYDRUS_OCR_API_URL")
+hydrus_api_url: str = os.getenv("HYDRUS_OCR_API_URL", "http://localhost:45869")
+loop_delay: int = int(os.getenv("HYDRUS_OCR_LOOP_DELAY", "10"))
+ocr_language: str = os.getenv("HYDRUS_OCR_LANGUAGE", "eng")
+
+# These values have no possible fallback values.
+# if either are set to None, mistakes were made.
 access_key: str = os.getenv("HYDRUS_OCR_ACCESS_KEY")
 tag_service_key: str = os.getenv("HYDRUS_OCR_TAG_SERVICE_KEY")
-loop_delay: int = int(os.getenv("HYDRUS_OCR_LOOP_DELAY"))
-ocr_language: str = os.getenv("HYDRUS_OCR_LANGUAGE")
+
+if not (access_key and tag_service_key):
+    raise MissingTokenError()
 
 # determine if we want to run in "singular run mode" or "daemon mode"
 # "singular run mode" runs the program once then exits
@@ -98,7 +106,7 @@ def ocr_image(image: Image) -> str:
     image.filter(ImageFilter.SHARPEN)
     tool = pyocr.get_available_tools()[0]
     if not tool:
-        raise Exception("hydrus_ocr depends on third-party software to OCR files. Please install one of the options listed in the documentation to resolve the error.")
+        raise MissingToolError()
 
     return tool.image_to_string(
             image,
