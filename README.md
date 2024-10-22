@@ -1,8 +1,11 @@
+> [!WARNING]  
+> I no longer use Hydrus Network. While I'll try to do my best to fix critical bugs, I won't be adding new features.
+
 # hydrus-ocr
 
 This project runs [OCR](https://en.wikipedia.org/wiki/Optical_character_recognition) on images located in [Hydrus Network](https://hydrusnetwork.github.io/hydrus/) using an external daemon and a third-party library.
 
-> [!WARNING]
+> [!CAUTION]
 > I am not liable if this destroys your data. **[Make backups regularly](https://hydrusnetwork.github.io/hydrus/getting_started_installing.html#backing_up)**.
 
 
@@ -51,7 +54,7 @@ The changelog is maintained in [`./CHANGELOG.md`](./CHANGELOG.md).
 You shouldn't. You should read the source code yourself. I've tried to make the code as easy-to-read as possible, with docstrings for all (internal) functions and comments for ambiguous lines of code.
 
 ### Why does this exist?
-I use Hydrus to store a large repository of screenshots of chat logs. I wanted to find a way to search their text, and this is the result.
+I used Hydrus to store a large repository of screenshots of chat logs. I wanted to find a way to search their text, and this is the result.
 
 ### Why is the quality of the text so bad?
 This program uses Tesseract to do most of the heavy lifting. Tesseract is notoriously bad at OCRing specific types of images, as well as images of lower quality.
