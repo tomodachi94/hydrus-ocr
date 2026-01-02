@@ -1,3 +1,6 @@
+"""
+Programmatic interface to hydrus_ocr.
+"""
 from io import BytesIO
 
 # manipulate images

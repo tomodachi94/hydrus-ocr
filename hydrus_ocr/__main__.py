@@ -28,9 +28,9 @@ if not (access_key and tag_service_key):
 # "singular run mode" runs the program once then exits
 # "daemon mode" runs the program continuously
 if sys.argv[1] and (sys.argv[1] == "singular"):
-    daemon: bool = False
+    DAEMON_MODE: bool = False
 elif sys.argv[1] and (sys.argv[1] == "daemon"):
-    daemon: bool = True
+    DAEMON_MODE: bool = True
 else:
     raise NoSubcommandError(NoSubcommandError.__doc__)
 
@@ -46,7 +46,7 @@ def mainloop():
             threading.Thread(target=ocr_client.process_image, args=(i,)).start()
 
         # If we're not in daemon mode, exit immediately after first run
-        if not daemon:
+        if not DAEMON_MODE:
             run = False
         else:
             sleep(loop_delay)
