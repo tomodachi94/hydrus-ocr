@@ -12,6 +12,9 @@ from hydrus_api import Client
 from hydrus_ocr.errors import MissingToolError
 
 # This is a list of all filetypes supported by both PIL and Hydrus
+# Reference:
+# * https://hydrusnetwork.github.io/hydrus/filetypes.html#images
+# * https://pillow.readthedocs.io/en/stable/handbook/image-file-formats.html
 valid_file_types = [
         "image/jpeg",
         "image/png",
